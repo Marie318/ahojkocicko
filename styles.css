@@ -52,13 +52,25 @@ body {
 }
 
 .devil-figure {
-    width: 220px;
-    height: 300px;
-    margin: 0 auto 8px auto;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    margin: 0 auto 16px auto;
     display: block;
     filter: drop-shadow(0 14px 28px rgba(0,0,0,0.8));
     transform-origin: center bottom;
     animation: subtleFloat 6s ease-in-out infinite;
+    position: relative;
+}
+.devil-figure img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    border: 2px solid rgba(255,20,60,0.18);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    display: block;
+    mask-image: radial-gradient(circle at center, rgba(255,255,255,1) 70%, rgba(255,255,255,0) 100%);
+    -webkit-mask-image: radial-gradient(circle at center, rgba(255,255,255,1) 70%, rgba(255,255,255,0) 100%);
 }
 
 @keyframes subtleFloat {
@@ -178,9 +190,10 @@ model-viewer {
     box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255,20,60,0.08) inset;
 }
 
-.uploader { margin-top: 12px; display:flex; gap:12px; justify-content:center; align-items:center; }
+.uploader { margin-top: 12px; display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap: wrap; }
 .uploader input { color: #fff; }
 .control-btn { background: transparent; border: 1px solid rgba(255,20,60,0.3); color: #ffd6da; padding: 8px 12px; border-radius:6px; cursor:pointer; }
+.audio-status { margin-top: 8px; color: rgba(255,150,160,0.95); font-size: 0.9em; }
 
 .colors-info {
     font-size: 0.85em;

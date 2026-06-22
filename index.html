@@ -26,46 +26,7 @@
             </g>
         </svg>
         <div class="devil-figure" aria-hidden="true">
-            <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="devilSkin" x1="0%" x2="100%">
-                        <stop offset="0%" stop-color="#3a0000" />
-                        <stop offset="100%" stop-color="#6b0000" />
-                    </linearGradient>
-                    <linearGradient id="devilGlow" x1="0%" x2="100%">
-                        <stop offset="0%" stop-color="#ff6b6b" stop-opacity="0.9" />
-                        <stop offset="100%" stop-color="#ff001f" stop-opacity="0.95" />
-                    </linearGradient>
-                    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="6" result="blur" />
-                        <feMerge>
-                            <feMergeNode in="blur" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                    </filter>
-                </defs>
-                <!-- cloak -->
-                <path d="M40 80 C20 150, 20 220, 100 260 C180 220, 180 150, 160 80 Z" fill="#180000" />
-                <!-- body torso -->
-                <ellipse cx="100" cy="120" rx="40" ry="50" fill="url(#devilSkin)" />
-                <!-- head -->
-                <circle cx="100" cy="55" r="30" fill="url(#devilSkin)" />
-                <!-- horns -->
-                <path d="M80 30 C70 5, 50 10, 60 36" stroke="#ff1f3a" stroke-width="4" fill="none" stroke-linecap="round" />
-                <path d="M120 30 C130 5, 150 10, 140 36" stroke="#ff1f3a" stroke-width="4" fill="none" stroke-linecap="round" />
-                <!-- eyes -->
-                <rect x="85" y="48" width="8" height="6" fill="#ffb3b3" rx="2" filter="url(#softGlow)" />
-                <rect x="107" y="48" width="8" height="6" fill="#ffb3b3" rx="2" filter="url(#softGlow)" />
-                <!-- mouth -->
-                <path d="M88 68 C95 76, 105 76, 112 68" stroke="#b30000" stroke-width="2" fill="none" stroke-linecap="round" />
-                <!-- hands -->
-                <path d="M55 125 C30 140, 40 170, 60 150" stroke="#2b0000" stroke-width="6" fill="none" stroke-linecap="round" />
-                <path d="M145 125 C170 140, 160 170, 140 150" stroke="#2b0000" stroke-width="6" fill="none" stroke-linecap="round" />
-                <!-- tail subtle -->
-                <path d="M150 210 C170 220, 180 240, 160 250" stroke="#400000" stroke-width="6" fill="none" stroke-linecap="round" />
-                <!-- subtle glow around figure -->
-                <ellipse cx="100" cy="140" rx="70" ry="30" fill="url(#devilGlow)" opacity="0.06" />
-            </svg>
+            <img src="Gemini_Generated_Image_1uq6mq1uq6mq1uq6.png" alt="Foto satana" />
         </div>
         <h1>Pekelná Kočičí Věštírna</h1>
         
@@ -91,9 +52,13 @@
                 <label class="control-btn">Nahrát obrázek
                     <input id="imageFile" type="file" accept="image/*" style="display:none">
                 </label>
+                <label class="control-btn">Nahrát zvuk
+                    <input id="audioFile" type="file" accept="audio/*" style="display:none">
+                </label>
                 <button id="resetViewer" class="control-btn">Obnovit</button>
             </div>
-            <div style="font-size:0.85em;color:rgba(255,180,190,0.9);margin-top:8px">Tip: Nahraj vlastní `.glb` pro fotorealistický model, nebo obrázek jako fallback.</div>
+            <div class="audio-status" id="audioStatus">Žádný zvuk není nahraný.</div>
+            <div style="font-size:0.85em;color:rgba(255,180,190,0.9);margin-top:8px">Tip: Nahraj vlastní `.glb` pro fotorealistický model, obrázek jako fallback nebo audio pro hlas satana.</div>
             <div id="viewerMessage" style="margin-top:8px;color:rgba(255,150,160,0.95);"></div>
         </div>
 

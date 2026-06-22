@@ -30,6 +30,14 @@ function getCatFortune() {
     fortuneElement.classList.remove('fortune-empty');
     fortuneElement.textContent = fortune;
 
+    // play uploaded Satan voice if available
+    if (audioPlayer.src) {
+        audioPlayer.currentTime = 0;
+        audioPlayer.play().catch(() => {
+            audioStatus.textContent = 'Audio se nenašlo nebo bylo zablokováno. Klikni znovu pro přehrání.';
+        });
+    }
+
     // Animace
     fortuneElement.style.animation = 'none';
     setTimeout(() => {
@@ -40,15 +48,19 @@ function getCatFortune() {
 // 3D viewer upload handlers
 const modelInput = document.getElementById('modelFile');
 const imageInput = document.getElementById('imageFile');
+const audioInput = document.getElementById('audioFile');
 const viewer = document.getElementById('viewer');
 const resetBtn = document.getElementById('resetViewer');
+const audioStatus = document.getElementById('audioStatus');
+
+let audioUrl = null;
+let audioPlayer = new Audio();
 
 modelInput.addEventListener('change', (e) => {
     const f = e.target.files[0];
     if (!f) return;
     const url = URL.createObjectURL(f);
     viewer.src = url;
-    // revoke objectURL after model loads
     viewer.addEventListener('load', () => { URL.revokeObjectURL(url); }, { once: true });
 });
 
@@ -57,6 +69,16 @@ imageInput.addEventListener('change', (e) => {
     if (!f) return;
     const url = URL.createObjectURL(f);
     viewer.poster = url; // set image as poster/fallback
+});
+
+audioInput.addEventListener('change', (e) => {
+    const f = e.target.files[0];
+    if (!f) return;
+    if (audioUrl) URL.revokeObjectURL(audioUrl);
+    audioUrl = URL.createObjectURL(f);
+    audioPlayer.src = audioUrl;
+    audioPlayer.load();
+    audioStatus.textContent = `Nahraný zvuk: ${f.name}`;
 });
 
 resetBtn.addEventListener('click', () => {
