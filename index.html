@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kočičí Věštírna</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <svg class="sigil" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+                <linearGradient id="g" x1="0%" x2="100%" y1="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ff2d7a" stop-opacity="1" />
+                    <stop offset="100%" stop-color="#ff004f" stop-opacity="1" />
+                </linearGradient>
+            </defs>
+            <g fill="none" stroke="url(#g)" stroke-width="2">
+                <circle cx="100" cy="100" r="72" />
+                <polygon points="100,28 140,150 60,150" />
+                <circle cx="100" cy="100" r="40" stroke-opacity="0.5" />
+                <path d="M60 120 L140 80" stroke-opacity="0.35" />
+                <path d="M60 80 L140 120" stroke-opacity="0.35" />
+            </g>
+        </svg>
+        <div class="devil-figure" aria-hidden="true">
+            <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="devilSkin" x1="0%" x2="100%">
+                        <stop offset="0%" stop-color="#3a0000" />
+                        <stop offset="100%" stop-color="#6b0000" />
+                    </linearGradient>
+                    <linearGradient id="devilGlow" x1="0%" x2="100%">
+                        <stop offset="0%" stop-color="#ff6b6b" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#ff001f" stop-opacity="0.95" />
+                    </linearGradient>
+                    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="6" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+                <!-- cloak -->
+                <path d="M40 80 C20 150, 20 220, 100 260 C180 220, 180 150, 160 80 Z" fill="#180000" />
+                <!-- body torso -->
+                <ellipse cx="100" cy="120" rx="40" ry="50" fill="url(#devilSkin)" />
+                <!-- head -->
+                <circle cx="100" cy="55" r="30" fill="url(#devilSkin)" />
+                <!-- horns -->
+                <path d="M80 30 C70 5, 50 10, 60 36" stroke="#ff1f3a" stroke-width="4" fill="none" stroke-linecap="round" />
+                <path d="M120 30 C130 5, 150 10, 140 36" stroke="#ff1f3a" stroke-width="4" fill="none" stroke-linecap="round" />
+                <!-- eyes -->
+                <rect x="85" y="48" width="8" height="6" fill="#ffb3b3" rx="2" filter="url(#softGlow)" />
+                <rect x="107" y="48" width="8" height="6" fill="#ffb3b3" rx="2" filter="url(#softGlow)" />
+                <!-- mouth -->
+                <path d="M88 68 C95 76, 105 76, 112 68" stroke="#b30000" stroke-width="2" fill="none" stroke-linecap="round" />
+                <!-- hands -->
+                <path d="M55 125 C30 140, 40 170, 60 150" stroke="#2b0000" stroke-width="6" fill="none" stroke-linecap="round" />
+                <path d="M145 125 C170 140, 160 170, 140 150" stroke="#2b0000" stroke-width="6" fill="none" stroke-linecap="round" />
+                <!-- tail subtle -->
+                <path d="M150 210 C170 220, 180 240, 160 250" stroke="#400000" stroke-width="6" fill="none" stroke-linecap="round" />
+                <!-- subtle glow around figure -->
+                <ellipse cx="100" cy="140" rx="70" ry="30" fill="url(#devilGlow)" opacity="0.06" />
+            </svg>
+        </div>
+        <h1>Pekelná Kočičí Věštírna</h1>
+        
+        <p class="subtitle">Vítej v plamenech — tady ti kočka-satan zašeptá pravdu.</p>
+        
+        <div class="fortune-display">
+            <div class="fortune-text">
+                <span id="fortune" class="fortune-empty">Klikni a kočka ti zašeptá vtip! 😸</span>
+            </div>
+        </div>
+
+        <button onclick="getCatFortune()">🎱 Ptej se pekelné kočky 🎱</button>
+
+        <div class="viewer-wrap">
+            <model-viewer id="viewer" src="models/devil.glb" alt="3D pekelný satanský model" camera-controls auto-rotate exposure="1" shadow-intensity="1" style="--poster-color: #000000;">
+                <button slot="ar-button" class="control-btn">Zobrazit v AR</button>
+            </model-viewer>
+
+            <div class="uploader">
+                <label class="control-btn">Nahrát GLB
+                    <input id="modelFile" type="file" accept="model/gltf-binary,model/gltf+json,.glb,.gltf" style="display:none">
+                </label>
+                <label class="control-btn">Nahrát obrázek
+                    <input id="imageFile" type="file" accept="image/*" style="display:none">
+                </label>
+                <button id="resetViewer" class="control-btn">Obnovit</button>
+            </div>
+            <div style="font-size:0.85em;color:rgba(255,180,190,0.9);margin-top:8px">Tip: Nahraj vlastní `.glb` pro fotorealistický model, nebo obrázek jako fallback.</div>
+            <div id="viewerMessage" style="margin-top:8px;color:rgba(255,150,160,0.95);"></div>
+        </div>
+
+        <div class="paw-print">🐾</div>
+
+        <div class="stars">✨ ✨ ✨</div>
+
+        <div class="colors-info">
+            🔥 Pekelné tóny: červená · černá · popel
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
